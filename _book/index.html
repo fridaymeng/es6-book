@@ -536,10 +536,30 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="introduction">Introduction</h1>
-<p>Preview and serve your book using:</p>
-<h3 id="gitbook-serve">$ gitbook serve</h3>
-<p>Or build the static website using:</p>
-<h3 id="gitbook-build">$ gitbook build</h3>
+<p>This book is about ECMAScript 6 (whose official name is ECMAScript 2015), a new version of JavaScript.</p>
+<ul>
+<li><p>In order to understand this book, you should already know JavaScript.</p>
+</li>
+<li><p>This book covers ECMAScript 6 in depth.</p>
+</li>
+<li><p>This book not only tells you how ES6 works, it also tells you why it works the way it does.</p>
+</li>
+</ul>
+<h4 id="destructive-operations">Destructive operations</h4>
+<p>Destructive operations (methods, functions) modify their parameters or their receivers. For example, push() modifies its receiver arr:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+arr.push(<span class="hljs-string">&apos;c&apos;</span>)
+<span class="hljs-built_in">console</span>.log(arr)
+<span class="hljs-comment">// [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span>
+</code></pre>
+<p>In contrast, concat() creates a new Array and does not change its receiver arr:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+arr.concat([<span class="hljs-string">&apos;c&apos;</span>])
+<span class="hljs-built_in">console</span>.log(arr)
+<span class="hljs-comment">// [&apos;a&apos;, &apos;b&apos;]</span>
+</code></pre>
+<pre><code class="lang-bash">gitbook serve/build
+</code></pre>
 
                                 
                                 </section>
@@ -579,7 +599,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"About ECMAScript 6 (ES6)","level":"1.2","depth":1,"path":"AboutECMA.md","ref":"AboutECMA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-07-17T07:53:23.628Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-17T09:14:14.165Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"About ECMAScript 6 (ES6)","level":"1.2","depth":1,"path":"AboutECMA.md","ref":"AboutECMA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-07-17T09:54:01.835Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-17T09:23:56.651Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
