@@ -8,7 +8,7 @@
 - [New number and Math features](NewnumberandMathfeatures.md)
 - [New string features](Newstringfeatures.md)
 - [Symbols](Symbols.md)
-- [Template literals](Templateliterals)
+- [Template literals](Templateliterals.md)
 - [Variables and scoping](Variablesandscoping.md)
 - [Destructuring](Destructuring.md)
 - [Parameter handling](Parameterhandling.md)
