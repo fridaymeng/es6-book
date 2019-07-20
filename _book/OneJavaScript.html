@@ -537,7 +537,17 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>one javascript</p>
+                                <p>On the web, you could tag ECMAScript 6 code via a dedicated Internet media type. Such a media type can be associated with a file via an HTTP header:</p>
+<pre><code class="lang-html">Content-Type: application/ecmascript;version=6
+</code></pre>
+<p>It can also be associated via the type attribute of the &lt;script&gt; element (whose default value is text/javascript):</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;application/ecmascript;version=6&quot;</span>&gt;</span><span class="undefined">
+  &#xB7;&#xB7;&#xB7;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<h4 id="implicit-strict-mode">Implicit strict mode</h4>
+<p>The bodies of modules and classes are implicitly in strict mode in ECMAScript 6 &#x2013; there is no need for the &apos;use strict&apos; marker. Given that virtually all of our code will live in modules in the future, ECMAScript 6 effectively upgrades the whole language to strict mode.</p>
+<p>The bodies of other constructs (such as arrow functions and generator functions) could have been made implicitly strict, too. But considering how small these constructs usually are, using them in sloppy mode would have resulted in code that is fragmented between the two modes. Classes and especially modules are large enough to make fragmentation less of an issue.</p>
 
                                 
                                 </section>
@@ -581,7 +591,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"One JavaScript: avoiding versioning in ECMAScript 6","level":"1.4","depth":1,"next":{"title":"Core ES6 features","level":"1.5","depth":1,"path":"CoreES6features.md","ref":"CoreES6features.md","articles":[]},"previous":{"title":"FAQ: ECMAScript 6","level":"1.3","depth":1,"path":"FAQ.md","ref":"FAQ.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"OneJavaScript.md","mtime":"2019-07-17T08:28:45.745Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-18T01:26:10.381Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"One JavaScript: avoiding versioning in ECMAScript 6","level":"1.4","depth":1,"next":{"title":"Core ES6 features","level":"1.5","depth":1,"path":"CoreES6features.md","ref":"CoreES6features.md","articles":[]},"previous":{"title":"FAQ: ECMAScript 6","level":"1.3","depth":1,"path":"FAQ.md","ref":"FAQ.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"OneJavaScript.md","mtime":"2019-07-20T08:37:49.169Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

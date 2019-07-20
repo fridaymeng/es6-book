@@ -537,7 +537,280 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>Core ES6</p>
+                                <h4 id="from-var-to-constlet">From var to const/let</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> x = <span class="hljs-number">3</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">func</span>(<span class="hljs-params">randomize</span>) </span>{
+  <span class="hljs-keyword">if</span> (randomize) {
+    <span class="hljs-keyword">let</span> x = <span class="hljs-built_in">Math</span>.random()
+    <span class="hljs-keyword">return</span> x
+  }
+  <span class="hljs-keyword">return</span> x
+}
+func(<span class="hljs-literal">false</span>) <span class="hljs-comment">// 3</span>
+</code></pre>
+<ul>
+<li>Prefer const. You can use it for all variables whose values never change.</li>
+<li>Otherwise, use let &#x2013; for variables whose values do change.</li>
+<li>Avoid var.</li>
+</ul>
+<h4 id="from-iifes-to-blocks">From IIFEs to blocks</h4>
+<p>In ES5, you had to use a pattern called IIFE (Immediately-Invoked Function Expression) if you wanted to restrict the scope of a variable tmp to a block:</p>
+<pre><code class="lang-js">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{  <span class="hljs-comment">// open IIFE</span>
+    <span class="hljs-keyword">var</span> tmp = &#xB7;&#xB7;&#xB7;;
+    &#xB7;&#xB7;&#xB7;
+}());  <span class="hljs-comment">// close IIFE</span>
+
+<span class="hljs-built_in">console</span>.log(tmp); <span class="hljs-comment">// ReferenceError</span>
+</code></pre>
+<p>In ECMAScript 6, you can simply use a block and a let declaration (or a const declaration):</p>
+<pre><code class="lang-js">{  <span class="hljs-comment">// open block</span>
+    <span class="hljs-keyword">let</span> tmp = &#xB7;&#xB7;&#xB7;;
+    &#xB7;&#xB7;&#xB7;
+}  <span class="hljs-comment">// close block</span>
+
+<span class="hljs-built_in">console</span>.log(tmp); <span class="hljs-comment">// ReferenceError</span>
+</code></pre>
+<h4 id="from-concatenating-strings-to-template-literals">From concatenating strings to template literals</h4>
+<p>With ES6, JavaScript finally gets literals for string interpolation and multi-line strings.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printCoord</span>(<span class="hljs-params">x, y</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`(<span class="hljs-subst">${x}</span>, <span class="hljs-subst">${y}</span>)`</span>)
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> HTML5_SKELETON = <span class="hljs-string">`
+    &lt;!doctype html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;`</span>
+</code></pre>
+<h4 id="from-function-expressions-to-arrow-functions">From function expressions to arrow functions</h4>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">UiComponent</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> button = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;myButton&apos;</span>)
+  button.addEventListener(<span class="hljs-string">&apos;click&apos;</span>, () =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;CLICK&apos;</span>)
+    <span class="hljs-keyword">this</span>.handleClick() <span class="hljs-comment">// (A)</span>
+  })
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+<span class="hljs-keyword">const</span> squares = arr.map(x =&gt; x * x)
+</code></pre>
+<h4 id="handling-multiple-return-values">Handling multiple return values</h4>
+<h5 id="multiple-return-values-via-arrays">Multiple return values via arrays</h5>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> [, year, month, day] =
+    <span class="hljs-regexp">/^(\d\d\d\d)-(\d\d)-(\d\d)$/</span>
+    .exec(<span class="hljs-string">&apos;2999-12-31&apos;</span>);
+    <span class="hljs-string">``</span><span class="hljs-string">`
+</span></code></pre>
+<h5 id="multiple-return-values-via-objects">Multiple return values via objects</h5>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = { foo: <span class="hljs-number">123</span> }
+<span class="hljs-keyword">const</span> { writable, configurable } = <span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(obj, <span class="hljs-string">&apos;foo&apos;</span>)
+<span class="hljs-built_in">console</span>.log(writable, configurable) <span class="hljs-comment">// true true</span>
+</code></pre>
+<p>{writable, configurable} is an abbreviation for:
+{ writable: writable, configurable: configurable }</p>
+<h4 id="from-for-to-foreach-to-for-of">From for to forEach() to for-of</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>]
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> elem <span class="hljs-keyword">of</span> arr) {
+  <span class="hljs-built_in">console</span>.log(elem)
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [index, elem] <span class="hljs-keyword">of</span> arr.entries()) {
+  <span class="hljs-built_in">console</span>.log(index + <span class="hljs-string">&apos;. &apos;</span> + elem)
+}
+</code></pre>
+<h4 id="handling-parameter-default-values">Handling parameter default values</h4>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">x=0, y=0</span>) </span>{
+    &#xB7;&#xB7;&#xB7;
+}
+</code></pre>
+<h4 id="handling-named-parameters">Handling named parameters</h4>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">selectEntries</span>(<span class="hljs-params">{ start=0, end=-1, step=1 } = {}</span>) </span>{
+    &#xB7;&#xB7;&#xB7;
+}
+</code></pre>
+<h4 id="from-arguments-to-rest-parameters">From arguments to rest parameters</h4>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logAllArguments</span>(<span class="hljs-params">...args</span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> arg <span class="hljs-keyword">of</span> args) {
+    <span class="hljs-built_in">console</span>.log(arg)
+  }
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">format</span>(<span class="hljs-params">pattern, ...args</span>) </span>{
+    &#xB7;&#xB7;&#xB7;
+}
+</code></pre>
+<h4 id="from-apply-to-the-spread-operator-">From apply() to the spread operator (...)</h4>
+<pre><code class="lang-js"><span class="hljs-built_in">Math</span>.max(...[<span class="hljs-number">-1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">11</span>, <span class="hljs-number">3</span>])
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr1 = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+<span class="hljs-keyword">const</span> arr2 = [<span class="hljs-string">&apos;c&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>]
+
+arr1.push(...arr2)
+</code></pre>
+<h4 id="from-concat-to-the-spread-operator-">From concat() to the spread operator (...)</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr1 = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+<span class="hljs-keyword">const</span> arr2 = [<span class="hljs-string">&apos;c&apos;</span>]
+<span class="hljs-keyword">const</span> arr3 = [<span class="hljs-string">&apos;d&apos;</span>, <span class="hljs-string">&apos;e&apos;</span>]
+
+<span class="hljs-built_in">console</span>.log([...arr1, ...arr2, ...arr3])
+</code></pre>
+<h4 id="from-function-expressions-in-object-literals-to-method-definitions">From function expressions in object literals to method definitions</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {
+    foo() {
+        &#xB7;&#xB7;&#xB7;
+    },
+    bar() {
+        <span class="hljs-keyword">this</span>.foo();
+    },
+}
+</code></pre>
+<h4 id="from-constructors-to-classes">From constructors to classes</h4>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>{
+  <span class="hljs-keyword">constructor</span>(name) {
+    <span class="hljs-keyword">this</span>.name = name
+  }
+  describe() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;Person called &apos;</span> + <span class="hljs-keyword">this</span>.name
+  }
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Person</span> </span>{
+  <span class="hljs-keyword">constructor</span>(name, title) {
+    <span class="hljs-keyword">super</span>(name)
+    <span class="hljs-keyword">this</span>.title = title
+  }
+  describe() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.describe() + <span class="hljs-string">&apos; (&apos;</span> + <span class="hljs-keyword">this</span>.title + <span class="hljs-string">&apos;)&apos;</span>
+  }
+}
+</code></pre>
+<h4 id="from-custom-error-constructors-to-subclasses-of-error">From custom error constructors to subclasses of Error</h4>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Error</span> </span>{}
+</code></pre>
+<h4 id="from-objects-to-maps">From objects to Maps</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>()
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countWords</span>(<span class="hljs-params">word</span>) </span>{
+  <span class="hljs-keyword">const</span> count = map.get(word) || <span class="hljs-number">0</span>
+  map.set(word, count + <span class="hljs-number">1</span>)
+}
+</code></pre>
+<h4 id="new-string-methods">New string methods</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (str.indexOf(<span class="hljs-string">&apos;x&apos;</span>) === <span class="hljs-number">0</span>) {
+} <span class="hljs-comment">// ES5</span>
+<span class="hljs-keyword">if</span> (str.startsWith(<span class="hljs-string">&apos;x&apos;</span>)) {
+} <span class="hljs-comment">// ES6</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">endsWith</span>(<span class="hljs-params">str, suffix</span>) </span>{
+  <span class="hljs-comment">// ES5</span>
+  <span class="hljs-keyword">var</span> index = str.indexOf(suffix)
+  <span class="hljs-keyword">return</span> index &gt;= <span class="hljs-number">0</span> &amp;&amp; index === str.length - suffix.length
+}
+str.endsWith(suffix) <span class="hljs-comment">// ES6</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">if</span> (str.indexOf(<span class="hljs-string">&apos;x&apos;</span>) &gt;= <span class="hljs-number">0</span>) {
+} <span class="hljs-comment">// ES5</span>
+<span class="hljs-keyword">if</span> (str.includes(<span class="hljs-string">&apos;x&apos;</span>)) {
+} <span class="hljs-comment">// ES6</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">3</span> + <span class="hljs-number">1</span>).join(<span class="hljs-string">&apos;#&apos;</span>) <span class="hljs-comment">// ES5</span>
+<span class="hljs-string">&apos;#&apos;</span>.repeat(<span class="hljs-number">3</span>) <span class="hljs-comment">// ES6</span>
+</code></pre>
+<h4 id="new-array-methods">New Array methods</h4>
+<h5 id="from-arrayprototypeindexof-to-arrayprototypefindindex">From Array.prototype.indexOf to Array.prototype.findIndex</h5>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-literal">NaN</span>]
+arr.indexOf(<span class="hljs-literal">NaN</span>) <span class="hljs-comment">// -1</span>
+arr.findIndex(x =&gt; <span class="hljs-built_in">Number</span>.isNaN(x)) <span class="hljs-comment">// 1</span>
+</code></pre>
+<pre><code class="lang-js">&gt; <span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&apos;abc&apos;</span>)
+<span class="hljs-literal">true</span>
+&gt; <span class="hljs-built_in">Number</span>.isNaN(<span class="hljs-string">&apos;abc&apos;</span>)
+<span class="hljs-literal">false</span>
+</code></pre>
+<h5 id="from-arrayprototypeslice-to-arrayfrom-or-the-spread-operator">From Array.prototype.slice() to Array.from() or the spread operator</h5>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> arr1 = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>) <span class="hljs-comment">// ES5</span>
+<span class="hljs-keyword">const</span> arr2 = <span class="hljs-built_in">Array</span>.from(<span class="hljs-built_in">arguments</span>) <span class="hljs-comment">// ES6</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr1 = [...<span class="hljs-string">&apos;abc&apos;</span>]
+<span class="hljs-comment">// [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span>
+<span class="hljs-keyword">const</span> arr2 = [...new <span class="hljs-built_in">Set</span>().add(<span class="hljs-string">&apos;a&apos;</span>).add(<span class="hljs-string">&apos;b&apos;</span>)]
+<span class="hljs-comment">// [&apos;a&apos;, &apos;b&apos;]</span>
+</code></pre>
+<h5 id="from-apply-to-arrayprototypefill">From apply() to Array.prototype.fill()</h5>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">2</span>).fill(<span class="hljs-literal">undefined</span>)
+<span class="hljs-keyword">const</span> arr1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">2</span>).fill(<span class="hljs-string">&apos;x&apos;</span>)
+</code></pre>
+<h4 id="from-commonjs-modules-to-es6-modules">From CommonJS modules to ES6 modules</h4>
+<h5 id="multiple-exports">Multiple exports</h5>
+<p>In CommonJS, you export multiple entities as follows:</p>
+<pre><code class="lang-js"><span class="hljs-comment">//------ lib.js ------</span>
+<span class="hljs-keyword">var</span> sqrt = <span class="hljs-built_in">Math</span>.sqrt
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">return</span> x * x
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">diag</span>(<span class="hljs-params">x, y</span>) </span>{
+  <span class="hljs-keyword">return</span> sqrt(square(x) + square(y))
+}
+<span class="hljs-built_in">module</span>.exports = {
+  sqrt: sqrt,
+  square: square,
+  diag: diag
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">//------ main1.js ------</span>
+<span class="hljs-keyword">var</span> square = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;lib&apos;</span>).square
+<span class="hljs-keyword">var</span> diag = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;lib&apos;</span>).diag
+
+<span class="hljs-built_in">console</span>.log(square(<span class="hljs-number">11</span>)) <span class="hljs-comment">// 121</span>
+<span class="hljs-built_in">console</span>.log(diag(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>)) <span class="hljs-comment">// 5</span>
+</code></pre>
+<p>or</p>
+<pre><code class="lang-js"><span class="hljs-comment">//------ main2.js ------</span>
+<span class="hljs-keyword">var</span> lib = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;lib&apos;</span>)
+<span class="hljs-built_in">console</span>.log(lib.square(<span class="hljs-number">11</span>)) <span class="hljs-comment">// 121</span>
+<span class="hljs-built_in">console</span>.log(lib.diag(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>)) <span class="hljs-comment">// 5</span>
+</code></pre>
+<p>In ES6, multiple exports are called named exports and handled like this:</p>
+<pre><code class="lang-js"><span class="hljs-comment">//------ lib.js ------</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> sqrt = <span class="hljs-built_in">Math</span>.sqrt
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">square</span>(<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">return</span> x * x
+}
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">diag</span>(<span class="hljs-params">x, y</span>) </span>{
+  <span class="hljs-keyword">return</span> sqrt(square(x) + square(y))
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">//------ main1.js ------</span>
+<span class="hljs-keyword">import</span> { square, diag } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;lib&apos;</span>
+<span class="hljs-built_in">console</span>.log(square(<span class="hljs-number">11</span>)) <span class="hljs-comment">// 121</span>
+<span class="hljs-built_in">console</span>.log(diag(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>)) <span class="hljs-comment">// 5</span>
+</code></pre>
+<p>The syntax for importing modules as objects looks as follows (line A):</p>
+<pre><code class="lang-js"><span class="hljs-comment">//------ main2.js ------</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> lib <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;lib&apos;</span> <span class="hljs-comment">// (A)</span>
+<span class="hljs-built_in">console</span>.log(lib.square(<span class="hljs-number">11</span>)) <span class="hljs-comment">// 121</span>
+<span class="hljs-built_in">console</span>.log(lib.diag(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>)) <span class="hljs-comment">// 5</span>
+</code></pre>
+<h5 id="single-exports">Single exports</h5>
+<p>Single exports in CommonJS</p>
+<pre><code class="lang-js"><span class="hljs-comment">//------ myFunc.js ------</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ &#xB7;&#xB7;&#xB7; };
+
+<span class="hljs-comment">//------ main1.js ------</span>
+<span class="hljs-keyword">var</span> myFunc = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;myFunc&apos;</span>);
+myFunc();
+</code></pre>
+<p>Single exports in ES6</p>
+<pre><code class="lang-js"><span class="hljs-comment">//------ myFunc.js ------</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ &#xB7;&#xB7;&#xB7; } <span class="hljs-comment">// no semicolon!</span>
+
+<span class="hljs-comment">//------ main1.js ------</span>
+<span class="hljs-keyword">import</span> myFunc <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;myFunc&apos;</span>;
+myFunc();
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +854,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Core ES6 features","level":"1.5","depth":1,"next":{"title":"New number and Math features","level":"1.6","depth":1,"path":"NewnumberandMathfeatures.md","ref":"NewnumberandMathfeatures.md","articles":[]},"previous":{"title":"One JavaScript: avoiding versioning in ECMAScript 6","level":"1.4","depth":1,"path":"OneJavaScript.md","ref":"OneJavaScript.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"CoreES6features.md","mtime":"2019-07-17T08:29:08.043Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-18T01:26:10.381Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Core ES6 features","level":"1.5","depth":1,"next":{"title":"New number and Math features","level":"1.6","depth":1,"path":"NewnumberandMathfeatures.md","ref":"NewnumberandMathfeatures.md","articles":[]},"previous":{"title":"One JavaScript: avoiding versioning in ECMAScript 6","level":"1.4","depth":1,"path":"OneJavaScript.md","ref":"OneJavaScript.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"CoreES6features.md","mtime":"2019-07-20T13:06:10.686Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
