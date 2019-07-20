@@ -545,6 +545,17 @@
 <li><p>This book not only tells you how ES6 works, it also tells you why it works the way it does.</p>
 </li>
 </ul>
+<h2 id="glossary">Glossary</h2>
+<h4 id="strict-mode-versus-sloppy-mode">Strict mode versus sloppy mode</h4>
+<p>Strict mode is switched on via the following line (which does nothing in ECMAScript versions before ES5):</p>
+<p>&apos;use strict&apos;;</p>
+<p>ES6 modules and classes are implicitly in strict mode.</p>
+<h4 id="protocol">Protocol</h4>
+<p>A protocol defines interfaces (signatures for methods and/or functions) and rules for using them.</p>
+<h4 id="receiver-of-a-method-call">Receiver (of a method call)</h4>
+<p>Given a method call obj.m(&#xB7;&#xB7;&#xB7;), obj is the receiver of the method call and accessible via this inside the method.</p>
+<h4 id="bindings-and-environments">Bindings and environments</h4>
+<p>The ECMAScript spec uses a data structure called environment to store the variables of a scope. An environment is basically a dictionary that maps variable names to values. A binding is an entry in an environment, storage space for a variable.</p>
 <h4 id="destructive-operations">Destructive operations</h4>
 <p>Destructive operations (methods, functions) modify their parameters or their receivers. For example, push() modifies its receiver arr:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
@@ -599,7 +610,7 @@ arr.concat([<span class="hljs-string">&apos;c&apos;</span>])
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"About ECMAScript 6 (ES6)","level":"1.2","depth":1,"path":"AboutECMA.md","ref":"AboutECMA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-07-17T09:54:01.835Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-17T09:23:56.651Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"About ECMAScript 6 (ES6)","level":"1.2","depth":1,"path":"AboutECMA.md","ref":"AboutECMA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-07-18T01:59:31.354Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-18T01:26:10.381Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
