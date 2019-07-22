@@ -537,7 +537,114 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>Variables and scoping</p>
+                                <h3 id="variables-and-scoping">Variables and scoping</h3>
+<h4 id="let">let</h4>
+<p>let works similarly to var, but the variable it declares is block-scoped, it only exists within the current block. var is function-scoped.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">order</span>(<span class="hljs-params">x, y</span>) </span>{
+  <span class="hljs-keyword">if</span> (x &gt; y) {
+    <span class="hljs-comment">// (A)</span>
+    <span class="hljs-keyword">let</span> tmp = x
+    x = y
+    y = tmp
+  }
+  <span class="hljs-built_in">console</span>.log(tmp === x) <span class="hljs-comment">// ReferenceError: tmp is not defined</span>
+  <span class="hljs-keyword">return</span> [x, y]
+}
+</code></pre>
+<h4 id="const">const</h4>
+<p>const works like let, but the variable you declare must be immediately initialized, with a value that can&#x2019;t be changed afterwards.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> foo;
+<span class="hljs-comment">// SyntaxError: missing = in const declaration</span>
+<span class="hljs-keyword">const</span> bar = <span class="hljs-number">123</span>;
+bar = <span class="hljs-number">456</span>;
+<span class="hljs-comment">// TypeError: `bar` is read-only</span>
+    <span class="hljs-string">``</span><span class="hljs-string">`
+</span></code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]) {
+  <span class="hljs-built_in">console</span>.log(x)
+}
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// a</span>
+<span class="hljs-comment">// b</span>
+</code></pre>
+<h4 id="ways-of-declaring-variables">Ways of declaring variables</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Hoisting</th>
+<th>Scope</th>
+<th>Creates global properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>var</td>
+<td>Declaration</td>
+<td>Function</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>let</td>
+<td>Temporal dead zone</td>
+<td>Block</td>
+<td>No</td>
+</tr>
+<tr>
+<td>const</td>
+<td>Temporal dead zone</td>
+<td>Block</td>
+<td>No</td>
+</tr>
+<tr>
+<td>function</td>
+<td>Complete</td>
+<td>Block</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>class</td>
+<td>No</td>
+<td>Block</td>
+<td>No</td>
+</tr>
+<tr>
+<td>import</td>
+<td>Complete</td>
+<td>Module-global</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {}
+obj.prop = <span class="hljs-number">123</span>
+<span class="hljs-built_in">console</span>.log(obj.prop) <span class="hljs-comment">// 123</span>
+<span class="hljs-keyword">const</span> obj = <span class="hljs-built_in">Object</span>.freeze({})
+obj.prop = <span class="hljs-number">123</span> <span class="hljs-comment">// TypeError</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logArgs</span>(<span class="hljs-params">...args</span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [index, elem] <span class="hljs-keyword">of</span> args.entries()) {
+    <span class="hljs-comment">// (A)</span>
+    <span class="hljs-keyword">const</span> message = index + <span class="hljs-string">&apos;. &apos;</span> + elem <span class="hljs-comment">// (B)</span>
+    <span class="hljs-built_in">console</span>.log(message)
+  }
+}
+logArgs(<span class="hljs-string">&apos;Hello&apos;</span>, <span class="hljs-string">&apos;everyone&apos;</span>)
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// 0. Hello</span>
+<span class="hljs-comment">// 1. everyone</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = []
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
+  arr.push(() =&gt; i)
+}
+arr.map(x =&gt; x())
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> entries = [[<span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;ja&apos;</span>], [<span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;nein&apos;</span>], [<span class="hljs-string">&apos;perhaps&apos;</span>, <span class="hljs-string">&apos;vielleicht&apos;</span>]]
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [source, target] <span class="hljs-keyword">of</span> entries) {
+  <span class="hljs-built_in">console</span>.log(source + <span class="hljs-string">&apos;-&apos;</span> + target)
+}
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +688,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Variables and scoping","level":"1.10","depth":1,"next":{"title":"Destructuring","level":"1.11","depth":1,"path":"Destructuring.md","ref":"Destructuring.md","articles":[]},"previous":{"title":"Template literals","level":"1.9","depth":1,"path":"Templateliterals.md","ref":"Templateliterals.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Variablesandscoping.md","mtime":"2019-07-17T08:35:09.050Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Variables and scoping","level":"1.10","depth":1,"next":{"title":"Destructuring","level":"1.11","depth":1,"path":"Destructuring.md","ref":"Destructuring.md","articles":[]},"previous":{"title":"Template literals","level":"1.9","depth":1,"path":"Templateliterals.md","ref":"Templateliterals.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Variablesandscoping.md","mtime":"2019-07-21T11:12:09.063Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -537,7 +537,83 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>Symbols</p>
+                                <h3 id="symbols">Symbols</h3>
+<p>Symbols are a new primitive type in ECMAScript 6. They are created via a factory function:</p>
+<pre><code class="lang-JS"><span class="hljs-keyword">const</span> mySymbol = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;mySymbol&apos;</span>);
+</code></pre>
+<h4 id="unique-property-keys">unique property keys</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> yieldIterator = {}
+yieldIterator[<span class="hljs-built_in">Symbol</span>.iterator] = <span class="hljs-function"><span class="hljs-keyword">function</span>*(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">yield</span> <span class="hljs-number">1</span>
+  <span class="hljs-keyword">yield</span> <span class="hljs-number">2</span>
+  <span class="hljs-keyword">yield</span> <span class="hljs-number">3</span>
+}
+[...yieldIterator] <span class="hljs-comment">// [1, 2, 3]</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> iterable = {
+  [<span class="hljs-built_in">Symbol</span>.iterator]() {
+    <span class="hljs-keyword">let</span> step = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">const</span> iterator = {
+      next() {
+        <span class="hljs-keyword">if</span> (step &lt;= <span class="hljs-number">2</span>) {
+          step++
+        }
+        <span class="hljs-keyword">switch</span> (step) {
+          <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            <span class="hljs-keyword">return</span> { value: <span class="hljs-string">&apos;hello&apos;</span>, done: <span class="hljs-literal">false</span> }
+          <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            <span class="hljs-keyword">return</span> { value: <span class="hljs-string">&apos;world&apos;</span>, done: <span class="hljs-literal">false</span> }
+          <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">return</span> { value: <span class="hljs-literal">undefined</span>, done: <span class="hljs-literal">true</span> }
+        }
+      }
+    }
+    <span class="hljs-keyword">return</span> iterator
+  }
+}
+</code></pre>
+<p>Let&#x2019;s check that iterable is, in fact, iterable:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> iterable) {
+  <span class="hljs-built_in">console</span>.log(x)
+}
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// hello</span>
+<span class="hljs-comment">// world</span>
+</code></pre>
+<h4 id="constants-representing-concepts">constants representing concepts</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> COLOR_RED = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;Red&apos;</span>)
+<span class="hljs-keyword">const</span> COLOR_ORANGE = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;Orange&apos;</span>)
+<span class="hljs-keyword">const</span> COLOR_YELLOW = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;Yellow&apos;</span>)
+<span class="hljs-keyword">const</span> COLOR_GREEN = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;Green&apos;</span>)
+<span class="hljs-keyword">const</span> COLOR_BLUE = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;Blue&apos;</span>)
+<span class="hljs-keyword">const</span> COLOR_VIOLET = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&apos;Violet&apos;</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getComplement</span>(<span class="hljs-params">color</span>) </span>{
+  <span class="hljs-keyword">switch</span> (color) {
+    <span class="hljs-keyword">case</span> COLOR_RED:
+      <span class="hljs-keyword">return</span> COLOR_GREEN
+    <span class="hljs-keyword">case</span> COLOR_ORANGE:
+      <span class="hljs-keyword">return</span> COLOR_BLUE
+    <span class="hljs-keyword">case</span> COLOR_YELLOW:
+      <span class="hljs-keyword">return</span> COLOR_VIOLET
+    <span class="hljs-keyword">case</span> COLOR_GREEN:
+      <span class="hljs-keyword">return</span> COLOR_RED
+    <span class="hljs-keyword">case</span> COLOR_BLUE:
+      <span class="hljs-keyword">return</span> COLOR_ORANGE
+    <span class="hljs-keyword">case</span> COLOR_VIOLET:
+      <span class="hljs-keyword">return</span> COLOR_YELLOW
+    <span class="hljs-keyword">default</span>:
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&apos;Unknown color: &apos;</span> + color)
+  }
+}
+</code></pre>
+<h4 id="symbols-as-property-keys">Symbols as property keys</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> MY_KEY = <span class="hljs-built_in">Symbol</span>()
+<span class="hljs-keyword">const</span> obj = {}
+
+obj[MY_KEY] = <span class="hljs-number">123</span>
+<span class="hljs-built_in">console</span>.log(obj[MY_KEY]) <span class="hljs-comment">// 123</span>
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +657,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Symbols","level":"1.8","depth":1,"next":{"title":"Template literals","level":"1.9","depth":1,"path":"Templateliterals.md","ref":"Templateliterals.md","articles":[]},"previous":{"title":"New string features","level":"1.7","depth":1,"path":"Newstringfeatures.md","ref":"Newstringfeatures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Symbols.md","mtime":"2019-07-17T08:30:09.832Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Symbols","level":"1.8","depth":1,"next":{"title":"Template literals","level":"1.9","depth":1,"path":"Templateliterals.md","ref":"Templateliterals.md","articles":[]},"previous":{"title":"New string features","level":"1.7","depth":1,"path":"Newstringfeatures.md","ref":"Newstringfeatures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Symbols.md","mtime":"2019-07-21T04:36:01.087Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

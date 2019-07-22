@@ -545,6 +545,105 @@
 &gt; <span class="hljs-number">0o10</span> <span class="hljs-comment">// ES6: octal</span>
 <span class="hljs-number">8</span>
 </code></pre>
+<pre><code class="lang-js">&gt; <span class="hljs-built_in">Number</span>.isInteger(<span class="hljs-number">1.05</span>)
+<span class="hljs-literal">false</span>
+&gt; <span class="hljs-built_in">Number</span>.isInteger(<span class="hljs-number">1</span>)
+<span class="hljs-literal">true</span>
+
+&gt; <span class="hljs-built_in">Number</span>.isInteger(<span class="hljs-number">-3.1</span>)
+<span class="hljs-literal">false</span>
+&gt; <span class="hljs-built_in">Number</span>.isInteger(<span class="hljs-number">-3</span>)
+<span class="hljs-literal">true</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-built_in">Number</span>.isSafeInteger(number)
+<span class="hljs-built_in">Number</span>.MIN_SAFE_INTEGER <span class="hljs-comment">//-9007199254740991</span>
+<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER <span class="hljs-comment">//9007199254740991</span>
+</code></pre>
+<pre><code class="lang-js">&gt; <span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&apos;???&apos;</span>)
+<span class="hljs-literal">true</span>
+&gt; <span class="hljs-built_in">Number</span>.isNaN(<span class="hljs-string">&apos;???&apos;</span>)
+<span class="hljs-literal">false</span>
+</code></pre>
+<p>Math.sign() returns the sign of a number:</p>
+<pre><code class="lang-js"><span class="hljs-comment">//&#x8FD4;&#x56DE;&#x6B63;&#x8D1F;&#x6570;</span>
+<span class="hljs-built_in">Math</span>.sign(<span class="hljs-number">-8</span>)
+<span class="hljs-comment">//- 1</span>
+<span class="hljs-built_in">Math</span>.sign(<span class="hljs-number">0</span>)
+<span class="hljs-comment">//0</span>
+<span class="hljs-built_in">Math</span>.sign(<span class="hljs-number">3</span>)
+<span class="hljs-comment">//1</span>
+</code></pre>
+<p>Math.trunc() removes the decimal fraction of a number:</p>
+<pre><code class="lang-js"><span class="hljs-comment">//&#x5C06;&#x6570;&#x5B57;&#x7684;&#x5C0F;&#x6570;&#x90E8;&#x5206;&#x53BB;&#x6389;&#xFF0C;&#x53EA;&#x4FDD;&#x7559;&#x6574;&#x6570;&#x90E8;&#x5206;&#x3002;</span>
+&gt; <span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">3.1</span>)
+<span class="hljs-number">3</span>
+&gt; <span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">3.9</span>)
+<span class="hljs-number">3</span>
+&gt; <span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">-3.1</span>)
+<span class="hljs-number">-3</span>
+&gt; <span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">-3.9</span>)
+<span class="hljs-number">-3</span>
+</code></pre>
+<p>Math.log10() computes the logarithm to base 10:</p>
+<pre><code class="lang-js"><span class="hljs-comment">//&#x5BF9;&#x6570;</span>
+&gt; <span class="hljs-built_in">Math</span>.log10(<span class="hljs-number">100</span>)
+<span class="hljs-number">2</span>
+</code></pre>
+<p>Math.hypot() Computes the square root of the sum of the squares of its arguments (Pythagoras&#x2019; theorem):</p>
+<pre><code class="lang-js">&gt; <span class="hljs-built_in">Math</span>.hypot(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>)
+<span class="hljs-number">5</span>
+</code></pre>
+<h4 id="new-integer-literals">New integer literals</h4>
+<p>ECMAScript 6 brings two new kinds of integer literals:</p>
+<ul>
+<li>Binary literals have the prefix 0b or 0B:</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">//&#x4E8C;&#x8FDB;&#x5236;</span>
+&gt; <span class="hljs-number">0b11</span>
+<span class="hljs-number">3</span>
+&gt; <span class="hljs-number">0b100</span>
+<span class="hljs-number">4</span>
+</code></pre>
+<ul>
+<li>Octal literals have the prefix 0o or 0O (that&#x2019;s a zero followed by the capital letter O; the first variant is safer):</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">//&#x516B;&#x8FDB;&#x5236;</span>
+&gt; <span class="hljs-number">0o7</span>
+<span class="hljs-number">7</span>
+&gt; <span class="hljs-number">0o10</span>
+<span class="hljs-number">8</span>
+</code></pre>
+<p>Remember that the Number method toString(radix) can be used to see numbers in a base other than 10:</p>
+<pre><code class="lang-js">&gt; <span class="hljs-number">255.</span>.toString(<span class="hljs-number">16</span>)
+<span class="hljs-string">&apos;ff&apos;</span>
+&gt; <span class="hljs-number">4.</span>.toString(<span class="hljs-number">2</span>)
+<span class="hljs-string">&apos;100&apos;</span>
+&gt; <span class="hljs-number">8.</span>.toString(<span class="hljs-number">8</span>)
+<span class="hljs-string">&apos;10&apos;</span>
+</code></pre>
+<h4 id="use-case-for-octal-literals-unix-style-file-permissions">Use case for octal literals: Unix-style file permissions</h4>
+<p>In the Node.js file system module, several functions have the parameter mode. Its value is used to specify file permissions, via an encoding that is a holdover from Unix:</p>
+<h5 id="permissions-are-specified-for-three-categories-of-users">Permissions are specified for three categories of users:</h5>
+<ul>
+<li>User: the owner of the file</li>
+<li>Group: the members of the group associated with the file</li>
+<li>All: everyone</li>
+</ul>
+<h5 id="per-category-the-following-permissions-can-be-granted">Per category, the following permissions can be granted:</h5>
+<ul>
+<li>r (read): the users in the category are allowed to read the file</li>
+<li>w (write): the users in the category are allowed to change the file</li>
+<li>x (execute): the users in the category are allowed to run the file</li>
+</ul>
+<pre><code class="lang-bash">000    &#x2013;&#x2013;&#x2013;    0
+001    &#x2013;&#x2013;x    1
+010    &#x2013;w&#x2013;    2
+011    &#x2013;wx    3
+100    r&#x2013;&#x2013;    4
+101    r&#x2013;x    5
+110    rw&#x2013;    6
+111    rwx    7
+</code></pre>
 
                                 
                                 </section>
@@ -588,7 +687,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"New number and Math features","level":"1.6","depth":1,"next":{"title":"New string features","level":"1.7","depth":1,"path":"Newstringfeatures.md","ref":"Newstringfeatures.md","articles":[]},"previous":{"title":"Core ES6 features","level":"1.5","depth":1,"path":"CoreES6features.md","ref":"CoreES6features.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"NewnumberandMathfeatures.md","mtime":"2019-07-20T13:24:30.225Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"New number and Math features","level":"1.6","depth":1,"next":{"title":"New string features","level":"1.7","depth":1,"path":"Newstringfeatures.md","ref":"Newstringfeatures.md","articles":[]},"previous":{"title":"Core ES6 features","level":"1.5","depth":1,"path":"CoreES6features.md","ref":"CoreES6features.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"NewnumberandMathfeatures.md","mtime":"2019-07-20T13:49:56.923Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -1,1 +1,1 @@
-CallableentitiesinECMAScript6
+### Callable entities in ECMAScript 6

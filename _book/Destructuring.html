@@ -537,7 +537,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>Destructuring</p>
+                                <h3 id="destructuring">Destructuring</h3>
+<h4 id="object-destructuring">Object destructuring</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = { first: <span class="hljs-string">&apos;Jane&apos;</span>, last: <span class="hljs-string">&apos;Doe&apos;</span> }
+<span class="hljs-keyword">const</span> { first: f, last: l } = obj
+<span class="hljs-comment">// f = &apos;Jane&apos;; l = &apos;Doe&apos;</span>
+
+<span class="hljs-comment">// {prop} is short for {prop: prop}</span>
+<span class="hljs-keyword">const</span> { first, last } = obj
+<span class="hljs-comment">// first = &apos;Jane&apos;; last = &apos;Doe&apos;</span>
+</code></pre>
+<h4 id="array-destructuring">Array destructuring</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> iterable = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+<span class="hljs-keyword">const</span> [x, y] = iterable
+<span class="hljs-comment">// x = &apos;a&apos;; y = &apos;b&apos;</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> [all, year, month, day] = <span class="hljs-regexp">/^(\d\d\d\d)-(\d\d)-(\d\d)$/</span>.exec(<span class="hljs-string">&apos;2999-12-31&apos;</span>)
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [index, element] <span class="hljs-keyword">of</span> arr.entries()) {
+  <span class="hljs-built_in">console</span>.log(index, element)
+}
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// 0 a</span>
+<span class="hljs-comment">// 1 b</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> [x, y] = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>] <span class="hljs-comment">// x = &apos;a&apos;; y = &apos;b&apos;</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>]
+<span class="hljs-keyword">const</span> iter = arr[<span class="hljs-built_in">Symbol</span>.iterator]()
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+  <span class="hljs-keyword">const</span> { done, value } = iter.next() <span class="hljs-comment">// (A)</span>
+  <span class="hljs-keyword">if</span> (done) <span class="hljs-keyword">break</span>
+  <span class="hljs-built_in">console</span>.log(value)
+}
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +615,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Destructuring","level":"1.11","depth":1,"next":{"title":"Parameter handling","level":"1.12","depth":1,"path":"Parameterhandling.md","ref":"Parameterhandling.md","articles":[]},"previous":{"title":"Variables and scoping","level":"1.10","depth":1,"path":"Variablesandscoping.md","ref":"Variablesandscoping.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Destructuring.md","mtime":"2019-07-17T08:35:29.705Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Destructuring","level":"1.11","depth":1,"next":{"title":"Parameter handling","level":"1.12","depth":1,"path":"Parameterhandling.md","ref":"Parameterhandling.md","articles":[]},"previous":{"title":"Variables and scoping","level":"1.10","depth":1,"path":"Variablesandscoping.md","ref":"Variablesandscoping.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Destructuring.md","mtime":"2019-07-21T11:54:17.696Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-20T02:51:33.571Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
