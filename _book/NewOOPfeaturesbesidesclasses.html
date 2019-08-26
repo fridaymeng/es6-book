@@ -538,6 +538,94 @@
                                 <section class="normal markdown-section">
                                 
                                 <h3 id="new-oop-features-besides-classes">New OOP features besides classes</h3>
+<p>In ECMAScript 5, methods are properties whose values are functions:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> obj = {
+    myMethod: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x, y</span>) </span>{
+        &#xB7;&#xB7;&#xB7;
+    }
+};
+</code></pre>
+<p>In ECMAScript 6, methods are still function-valued properties, but there is now a more compact way of defining them:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {
+    myMethod(x, y) {
+        &#xB7;&#xB7;&#xB7;
+    }
+};
+</code></pre>
+<p>Getters and setters continue to work as they did in ECMAScript 5 (note how syntactically similar they are to method definitions):</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {
+    get foo() {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;GET foo&apos;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;
+    },
+    set bar(value) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;SET bar to &apos;</span>+value);
+        <span class="hljs-comment">// return value is ignored</span>
+    }
+};
+</code></pre>
+<p>There is also a way to concisely define properties whose values are generator functions:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {
+    * myGeneratorMethod() {
+        &#xB7;&#xB7;&#xB7;
+    }
+};
+This code is equivalent to:
+
+<span class="hljs-keyword">const</span> obj = {
+    myGeneratorMethod: <span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{
+        &#xB7;&#xB7;&#xB7;
+    }
+};
+</code></pre>
+<h4 id="property-value-shorthands">Property value shorthands</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> x = <span class="hljs-number">4</span>;
+<span class="hljs-keyword">const</span> y = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> obj = { x, y };
+</code></pre>
+<p>The last line is equivalent to:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = { x: x, y: y };
+</code></pre>
+<h4 id="computed-property-keys">Computed property keys</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {
+    foo: <span class="hljs-literal">true</span>,
+    [<span class="hljs-string">&apos;b&apos;</span>+<span class="hljs-string">&apos;ar&apos;</span>]: <span class="hljs-number">123</span>
+};
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = {
+    * [<span class="hljs-built_in">Symbol</span>.iterator]() { <span class="hljs-comment">// (A)</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-string">&apos;hello&apos;</span>;
+        <span class="hljs-keyword">yield</span> <span class="hljs-string">&apos;world&apos;</span>;
+    }
+};
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> obj) {
+    <span class="hljs-built_in">console</span>.log(x);
+}
+</code></pre>
+<h4 id="new-methods-of-object">New methods of Object</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> obj = { foo: <span class="hljs-number">123</span> };
+<span class="hljs-built_in">Object</span>.assign(obj, { bar: <span class="hljs-literal">true</span> });
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(obj));
+<span class="hljs-comment">// {&quot;foo&quot;:123,&quot;bar&quot;:true}</span>
+</code></pre>
+<h4 id="objectisvalue1-value2">Object.is(value1, value2)</h4>
+<pre><code class="lang-js">&gt; <span class="hljs-built_in">Object</span>.is(<span class="hljs-literal">NaN</span>, <span class="hljs-literal">NaN</span>)
+<span class="hljs-literal">true</span>
+&gt; <span class="hljs-built_in">Object</span>.is(<span class="hljs-number">-0</span>, +<span class="hljs-number">0</span>)
+<span class="hljs-literal">false</span>
+</code></pre>
+<p>Array method findIndex() to find NaN in Arrays.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myIndexOf</span>(<span class="hljs-params">arr, elem</span>) </span>{
+    <span class="hljs-keyword">return</span> arr.findIndex(x =&gt; <span class="hljs-built_in">Object</span>.is(x, elem));
+}
+<span class="hljs-keyword">const</span> myArray = [<span class="hljs-number">0</span>,<span class="hljs-literal">NaN</span>,<span class="hljs-number">2</span>];
+myIndexOf(myArray, <span class="hljs-literal">NaN</span>); <span class="hljs-comment">// 1</span>
+myArray.indexOf(<span class="hljs-literal">NaN</span>); <span class="hljs-comment">// -1</span>
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> a = {bdd: <span class="hljs-number">0</span>};
+<span class="hljs-built_in">Object</span>.keys(a);
+[<span class="hljs-string">&quot;bdd&quot;</span>]
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +669,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"New OOP features besides classes","level":"1.15","depth":1,"next":{"title":"Classes","level":"1.16","depth":1,"path":"Classes.md","ref":"Classes.md","articles":[]},"previous":{"title":"Arrow functions","level":"1.14","depth":1,"path":"Arrowfunctions.md","ref":"Arrowfunctions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"NewOOPfeaturesbesidesclasses.md","mtime":"2019-07-22T12:07:12.075Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-13T09:29:41.279Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"New OOP features besides classes","level":"1.15","depth":1,"next":{"title":"Classes","level":"1.16","depth":1,"path":"Classes.md","ref":"Classes.md","articles":[]},"previous":{"title":"Arrow functions","level":"1.14","depth":1,"path":"Arrowfunctions.md","ref":"Arrowfunctions.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"NewOOPfeaturesbesidesclasses.md","mtime":"2019-08-25T06:15:17.916Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-25T05:01:27.341Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
