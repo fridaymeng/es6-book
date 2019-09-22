@@ -51,5 +51,6 @@ console.log(arr)
 ```
 
 ```bash
-gitbook serve/build
+gitbook serve
+gitbook build
 ```
