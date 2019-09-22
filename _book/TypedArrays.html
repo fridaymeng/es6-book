@@ -537,7 +537,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>TypedArrays</p>
+                                <h3 id="typed-arrays">Typed Arrays</h3>
+<p></p><p>
+&#x4E3A;&#x4E86;&#x5728; WebGL &#x4E2D;&#x9AD8;&#x6548;&#x5730;&#x64CD;&#x4F5C;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#xFF0C;ES6 &#x4E3A;&#x6D4F;&#x89C8;&#x5668;&#x5F15;&#x5165;&#x4E86; TypedArray &#x548C; DataView&#xFF0C;&#x4E24;&#x4E2A;&#x64CD;&#x4F5C;&#x5E95;&#x5C42;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x7684;&#x89C6;&#x56FE;&#x3002;&#x56E0;&#x4E3A;&#x5177;&#x6709;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x5185;&#x5B58;&#x7684;&#x80FD;&#x529B;&#x800C;&#x4E0D;&#x7528;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#xFF0C;&#x5728;&#x5904;&#x7406; WebGL &#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x4E0A;&#x6027;&#x80FD;&#x8FDC;&#x9AD8;&#x4E8E; Array&#x3002;
+</p><p></p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> typedArray = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>([<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]);
+<span class="hljs-built_in">console</span>.log(typedArray.length); <span class="hljs-comment">// 3</span>
+typedArray[<span class="hljs-number">0</span>] = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">const</span> normalArray = [...typedArray]; <span class="hljs-comment">// [5,1,2]</span>
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +589,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Typed Arrays","level":"1.21","depth":1,"next":{"title":"Iterables and iterators","level":"1.22","depth":1,"path":"Iterablesanditerators.md","ref":"Iterablesanditerators.md","articles":[]},"previous":{"title":"Maps and Sets","level":"1.20","depth":1,"path":"MapsandSets.md","ref":"MapsandSets.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"TypedArrays.md","mtime":"2019-07-17T08:39:14.559Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Typed Arrays","level":"1.21","depth":1,"next":{"title":"Iterables and iterators","level":"1.22","depth":1,"path":"Iterablesanditerators.md","ref":"Iterablesanditerators.md","articles":[]},"previous":{"title":"Maps and Sets","level":"1.20","depth":1,"path":"MapsandSets.md","ref":"MapsandSets.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"TypedArrays.md","mtime":"2019-09-22T09:11:07.059Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

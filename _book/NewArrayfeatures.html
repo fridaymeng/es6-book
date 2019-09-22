@@ -537,7 +537,62 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>NewArrayfeatures</p>
+                                <h3 id="new-array-features">New Array features</h3>
+<h4 id="new-static-array-methods">New static Array methods</h4>
+<p>Array.from(arrayLike, mapFunc?, thisArg?)</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arrayLike = { length: <span class="hljs-number">2</span>, <span class="hljs-number">0</span>: <span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-number">1</span>: <span class="hljs-string">&apos;b&apos;</span> };
+
+<span class="hljs-comment">// for-of only works with iterable values</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> arrayLike) { <span class="hljs-comment">// TypeError</span>
+    <span class="hljs-built_in">console</span>.log(x);
+}
+
+<span class="hljs-keyword">const</span> arr = <span class="hljs-built_in">Array</span>.from(arrayLike);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> arr) { <span class="hljs-comment">// OK, iterable</span>
+    <span class="hljs-built_in">console</span>.log(x);
+}
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// a</span>
+<span class="hljs-comment">// b</span>
+</code></pre>
+<p>Array.from() is also a convenient alternative to using map() generically:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> spans = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&apos;span.name&apos;</span>);
+
+<span class="hljs-comment">// map(), generically:</span>
+<span class="hljs-keyword">const</span> names1 = <span class="hljs-built_in">Array</span>.prototype.map.call(spans, s =&gt; s.textContent);
+
+<span class="hljs-comment">// Array.from():</span>
+<span class="hljs-keyword">const</span> names2 = <span class="hljs-built_in">Array</span>.from(spans, s =&gt; s.textContent);
+</code></pre>
+<p>Iterating over Arrays</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Array</span>.from([<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>].keys())
+<span class="hljs-comment">//  0, 1 ]</span>
+<span class="hljs-built_in">Array</span>.from([<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>].values())
+<span class="hljs-comment">// [ &apos;a&apos;, &apos;b&apos; ]</span>
+<span class="hljs-built_in">Array</span>.from([<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>].entries())
+<span class="hljs-comment">// [ [ 0, &apos;a&apos; ],  [ 1, &apos;b&apos; ] ]</span>
+</code></pre>
+<p>Searching for Array elements</p>
+<pre><code class="lang-js">[<span class="hljs-number">6</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">8</span>].find(x =&gt; x &lt; <span class="hljs-number">0</span>)
+<span class="hljs-comment">// -5</span>
+[<span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>].find(x =&gt; x &lt; <span class="hljs-number">0</span>)
+<span class="hljs-comment">// undefined</span>
+
+[<span class="hljs-number">6</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">8</span>].findIndex(x =&gt; x &lt; <span class="hljs-number">0</span>)
+<span class="hljs-comment">// 1</span>
+[<span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>].findIndex(x =&gt; x &lt; <span class="hljs-number">0</span>)
+<span class="hljs-comment">// -1</span>
+</code></pre>
+<p>Array.prototype.fill()</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>];
+arr.fill(<span class="hljs-number">7</span>)
+<span class="hljs-comment">// [ 7, 7, 7 ]</span>
+arr
+<span class="hljs-comment">// [ 7, 7, 7 ]</span>
+
+[<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>].fill(<span class="hljs-number">7</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+<span class="hljs-comment">// [ &apos;a&apos;, 7, &apos;c&apos; ]</span>
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +636,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"New Array features","level":"1.19","depth":1,"next":{"title":"Maps and Sets","level":"1.20","depth":1,"path":"MapsandSets.md","ref":"MapsandSets.md","articles":[]},"previous":{"title":"The for-of loop","level":"1.18","depth":1,"path":"Theforofloop.md","ref":"Theforofloop.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"NewArrayfeatures.md","mtime":"2019-07-17T08:38:20.050Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"New Array features","level":"1.19","depth":1,"next":{"title":"Maps and Sets","level":"1.20","depth":1,"path":"MapsandSets.md","ref":"MapsandSets.md","articles":[]},"previous":{"title":"The for-of loop","level":"1.18","depth":1,"path":"Theforofloop.md","ref":"Theforofloop.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"NewArrayfeatures.md","mtime":"2019-09-22T02:46:28.376Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

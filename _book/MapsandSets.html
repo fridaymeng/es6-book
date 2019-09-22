@@ -537,7 +537,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>MapsandSets</p>
+                                <h3 id="maps-and-sets">Maps and Sets</h3>
+<h4 id="maps">Maps</h4>
+<p>The keys of a Map can be arbitrary values:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// &#x6709;&#x5E8F;&#x7684;&#x952E;&#x503C;&#x5BF9;</span>
+<span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>(); <span class="hljs-comment">// create an empty Map</span>
+<span class="hljs-keyword">const</span> KEY = {};
+
+map.set(KEY, <span class="hljs-number">123</span>);
+map.get(KEY)
+<span class="hljs-comment">// 123</span>
+map.has(KEY)
+<span class="hljs-comment">// true</span>
+map.delete(KEY);
+<span class="hljs-comment">// true</span>
+map.has(KEY)
+<span class="hljs-comment">// false</span>
+</code></pre>
+<p>You can use an Array (or any iterable) with [key, value] pairs to set up the initial data in the Map:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>([
+    [ <span class="hljs-number">1</span>, <span class="hljs-string">&apos;one&apos;</span> ],
+    [ <span class="hljs-number">2</span>, <span class="hljs-string">&apos;two&apos;</span> ],
+    [ <span class="hljs-number">3</span>, <span class="hljs-string">&apos;three&apos;</span> ], 
+    <span class="hljs-comment">// trailing comma is ignored</span>
+]);
+</code></pre>
+<h4 id="sets">Sets</h4>
+<p>A Set is a collection of unique elements:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// &#x4E0D;&#x91CD;&#x590D;&#x7684;&#x6709;&#x5E8F;&#x5217;&#x8868;</span>
+<span class="hljs-keyword">const</span> arr = [<span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>];
+<span class="hljs-keyword">const</span> unique = [...new <span class="hljs-built_in">Set</span>(arr)]; 
+<span class="hljs-comment">// [ 5, 1, 7 ]</span>
+</code></pre>
+<h4 id="weakmapsweaksets">WeakMaps/WeakSets</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> set = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>();
+<span class="hljs-keyword">let</span> key={};
+<span class="hljs-keyword">let</span> key2 = {};
+set.add(key);
+set.add(key2);
+<span class="hljs-built_in">console</span>.log(set.size); 
+<span class="hljs-comment">// 2</span>
+
+key = <span class="hljs-literal">null</span>;
+<span class="hljs-built_in">console</span>.log(set.size); 
+<span class="hljs-comment">// 2</span>
+<span class="hljs-comment">// &#x5F31;&#x5F15;&#x7528;&#x952E;&#x7684;&#x5BF9;&#x8C61;</span>
+<span class="hljs-keyword">const</span> _objToListeners = <span class="hljs-keyword">new</span> <span class="hljs-built_in">WeakMap</span>();
+
+<span class="hljs-keyword">const</span> _proxies = <span class="hljs-keyword">new</span> <span class="hljs-built_in">WeakSet</span>();
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +629,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Maps and Sets","level":"1.20","depth":1,"next":{"title":"Typed Arrays","level":"1.21","depth":1,"path":"TypedArrays.md","ref":"TypedArrays.md","articles":[]},"previous":{"title":"New Array features","level":"1.19","depth":1,"path":"NewArrayfeatures.md","ref":"NewArrayfeatures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MapsandSets.md","mtime":"2019-07-17T08:38:49.699Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Maps and Sets","level":"1.20","depth":1,"next":{"title":"Typed Arrays","level":"1.21","depth":1,"path":"TypedArrays.md","ref":"TypedArrays.md","articles":[]},"previous":{"title":"New Array features","level":"1.19","depth":1,"path":"NewArrayfeatures.md","ref":"NewArrayfeatures.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MapsandSets.md","mtime":"2019-09-22T08:15:03.486Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
