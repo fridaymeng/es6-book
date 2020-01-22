@@ -1,1 +1,5 @@
-UnicodeinES6
+### Unicode in ES6
+```js
+  > '\x7A' === 'z'
+  true
+```

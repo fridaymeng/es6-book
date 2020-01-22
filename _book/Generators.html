@@ -537,7 +537,46 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>Generators</p>
+                                <h3 id="generators">Generators</h3>
+<h4 id="what-are-generators">What are generators?</h4>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">genFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// (A)</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;First&apos;</span>);
+    <span class="hljs-keyword">yield</span>;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Second&apos;</span>);
+}
+
+<span class="hljs-keyword">const</span> genObj = genFunc();
+
+genObj.next();
+<span class="hljs-comment">// Output: First</span>
+genObj.next();
+<span class="hljs-comment">// output: Second</span>
+</code></pre>
+<p>Generator function declarations:</p>
+<pre><code class="lang-js"> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">genFunc</span>(<span class="hljs-params"></span>) </span>{ &#xB7;&#xB7;&#xB7; }
+ <span class="hljs-keyword">const</span> genObj = genFunc();
+</code></pre>
+<p>Generator function expressions:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> genFunc = <span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{ &#xB7;&#xB7;&#xB7; };
+<span class="hljs-keyword">const</span> genObj = genFunc();
+Generator method definitions <span class="hljs-keyword">in</span> object literals:
+<span class="hljs-keyword">const</span> obj = {
+     * generatorMethod() {
+         &#xB7;&#xB7;&#xB7;
+     }
+};
+<span class="hljs-keyword">const</span> genObj = obj.generatorMethod();
+</code></pre>
+<p>Generator method definitions in class definitions (class declarations or class expressions):</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> </span>{
+     * generatorMethod() {
+         &#xB7;&#xB7;&#xB7;
+     }
+}
+<span class="hljs-keyword">const</span> myInst = <span class="hljs-keyword">new</span> MyClass();
+<span class="hljs-keyword">const</span> genObj = myInst.generatorMethod();
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +620,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Generators","level":"1.23","depth":1,"next":{"title":"New regular expression features","level":"1.24","depth":1,"path":"Newregularexpressionfeatures.md","ref":"Newregularexpressionfeatures.md","articles":[]},"previous":{"title":"Iterables and iterators","level":"1.22","depth":1,"path":"Iterablesanditerators.md","ref":"Iterablesanditerators.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Generators.md","mtime":"2019-07-17T08:39:47.304Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Generators","level":"1.23","depth":1,"next":{"title":"New regular expression features","level":"1.24","depth":1,"path":"Newregularexpressionfeatures.md","ref":"Newregularexpressionfeatures.md","articles":[]},"previous":{"title":"Iterables and iterators","level":"1.22","depth":1,"path":"Iterablesanditerators.md","ref":"Iterablesanditerators.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Generators.md","mtime":"2020-01-21T10:23:37.097Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-21T10:16:26.637Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

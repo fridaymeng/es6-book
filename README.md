@@ -1,6 +1,6 @@
 # Introduction
 
-This book is about ECMAScript 6 (whose official name is ECMAScript 2015), a new version of JavaScript.
+This book is about [ECMAScript 6 (whose official name is ECMAScript 2015)](https://exploringjs.com/es6/index.html), a new version of JavaScript.
 
 - In order to understand this book, you should already know JavaScript.
 

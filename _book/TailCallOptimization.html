@@ -537,7 +537,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>TailCallOptimization</p>
+                                <h3 id="tail-call-optimization">Tail call optimization</h3>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">factorial</span>(<span class="hljs-params">x</span>) </span>{
+    <span class="hljs-keyword">if</span> (x &lt;= <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> x * factorial(x<span class="hljs-number">-1</span>); <span class="hljs-comment">// (A)</span>
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -581,7 +589,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Tail call optimization","level":"1.28","depth":1,"next":{"title":"Metaprogramming with proxies","level":"1.29","depth":1,"path":"MetaprogrammingWithProxies.md","ref":"MetaprogrammingWithProxies.md","articles":[]},"previous":{"title":"Unicode in ES6","level":"1.27","depth":1,"path":"UnicodeinES6.md","ref":"UnicodeinES6.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"TailCallOptimization.md","mtime":"2019-07-17T08:42:13.649Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T01:36:55.825Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Tail call optimization","level":"1.28","depth":1,"next":{"title":"Metaprogramming with proxies","level":"1.29","depth":1,"path":"MetaprogrammingWithProxies.md","ref":"MetaprogrammingWithProxies.md","articles":[]},"previous":{"title":"Unicode in ES6","level":"1.27","depth":1,"path":"UnicodeinES6.md","ref":"UnicodeinES6.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"TailCallOptimization.md","mtime":"2020-01-22T08:55:59.848Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-21T10:16:26.637Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
